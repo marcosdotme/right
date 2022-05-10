@@ -1,5 +1,7 @@
 from pathlib import Path
-from typing import List, Union
+from typing import Dict, List, Union
+
+from dulwich.config import ConfigFile
 
 
 def create_directory(dir: Union[str, List[str]]) -> None:
@@ -50,3 +52,36 @@ def create_dunder_init_file(dir: Union[str, List[str]]) -> None:
                 file.touch(exist_ok = True)
             except FileNotFoundError:
                 print(f"Directory '{directory}' doesn't exists.")
+
+
+def get_users_git_config(git_config_file: str = Path().home() / '.gitconfig') -> Dict:
+    """Reads '.gitconfig' file to get name and email for the current user.
+
+    Keyword Arguments
+    -----------------
+        git_config_file `str`: Path to '.gitconfig' file. (default = Path().home()/'.gitconfig')
+
+    Returns
+    -------
+        `Dict`: Returns a dict with `name` and `email` keys.
+
+    Example usage
+    -------------
+    >>> get_users_git_config()
+    {'name': 'Your Name', 'email': 'your.email@your.domain.com'}
+    """
+
+    config_file = Path(git_config_file)
+
+    if not config_file.exists():
+        return {'name': '', 'email': ''}
+
+    with open(config_file, 'br') as file:
+        config_file = ConfigFile.from_file(file)
+
+        try:
+            name = config_file.get(section = 'user', name = 'name').decode()
+            email = config_file.get(section = 'user', name = 'email').decode()
+            return {'name': name, 'email': email}
+        except KeyError:
+            return {'name': '', 'email': ''}
