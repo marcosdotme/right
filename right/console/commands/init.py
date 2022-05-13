@@ -1,8 +1,9 @@
-from cleo.commands.command import Command
-from cleo.helpers import option
 from pathlib import Path
 
-from right.utils.functions import create_directory, create_dunder_init_file
+from cleo.commands.command import Command
+from cleo.helpers import option
+from right.utils.functions import create_directory
+from right.utils.functions import create_dunder_init_file
 
 
 class InitCommand(Command):
