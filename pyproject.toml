@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "right"
+version = "0.1.0"
+description = "Right is a python project environment initializer. He will initialize a python project enviroment in the RIGHT way for you. 👮‍"
+authors = ["Marcos Martins <contato@marcosmartins.me>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+cleo = {git = "https://github.com/sdispater/cleo.git"}
+dulwich = "^0.20.35"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
+dodgy = "^0.2.1"
+isort = "^5.10.1"
+pycodestyle = "^2.8.0"
+pydocstyle = "^6.1.1"
+pylint = "^2.13.7"
+pytest = "^7.1.2"
+pyroma = "^4.0"
+bandit = "^1.7.4"
+blue = "^0.8.0"
+pip-audit = "^2.1.1"
+prospector = {extras = ["with_mypy", "with_mccabe"], version = "^1.7.7"}
+reorder-python-imports = "^3.1.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
