@@ -28,7 +28,7 @@ A <comment>Python Project Environment</> includes:
     - ...
 '''
 
-    def handle(self):
+    def handle(self) -> None:
 
         # This variable value is 'None'
         # if user doesn't explicitly pass the argument --name
