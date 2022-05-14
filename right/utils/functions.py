@@ -6,7 +6,9 @@ from typing import Union
 from dulwich.config import ConfigFile
 
 
-def create_directory(dir: Union[str, List[str]]) -> None:
+def create_directory(
+    dir: Union[str, List[str]]
+) -> None:
     """Creates a new directory in current directory.
 
     Arguments
@@ -28,7 +30,9 @@ def create_directory(dir: Union[str, List[str]]) -> None:
             new_directory.mkdir(exist_ok = True)
 
 
-def create_dunder_init_file(dir: Union[str, List[str]]) -> None:
+def create_dunder_init_file(
+    dir: Union[str, List[str]]
+) -> None:
     """Creates a __init__.py file inside the directory.
 
     Arguments
@@ -56,7 +60,9 @@ def create_dunder_init_file(dir: Union[str, List[str]]) -> None:
                 print(f"Directory '{directory}' doesn't exists.")
 
 
-def get_users_git_config(git_config_file: str = Path().home() / '.gitconfig') -> Dict:
+def get_users_git_config(
+    git_config_file: str = Path().home() / '.gitconfig'
+) -> Dict:
     """Reads '.gitconfig' file to get name and email for the current user.
 
     Keyword Arguments
