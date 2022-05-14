@@ -1,13 +1,12 @@
 from pathlib import Path
 from typing import Dict
 from typing import List
-from typing import Union
 
 from dulwich.config import ConfigFile
 
 
 def create_directory(
-    dir: Union[str, List[str]]
+    dir: str | List[str]
 ) -> None:
     """Creates a new directory in current directory.
 
@@ -31,7 +30,7 @@ def create_directory(
 
 
 def create_dunder_init_file(
-    dir: Union[str, List[str]]
+    dir: str | List[str]
 ) -> None:
     """Creates a __init__.py file inside the directory.
 
