@@ -7,33 +7,48 @@ from right.utils.functions import create_dunder_init_file
 
 
 class InitCommand(Command):
-    """
-    Creates a <comment>Python Project Environment</> in the current directory.
+    name = 'init'
 
-    init
-    """
+    description = (
+        'Creates a <comment>Python Project Environment</> in the current directory.'
+    )
 
     options = [
-        option('name', None, 'Name of the project.', flag = False)
+        option(
+            long_name = 'name',
+            description = 'Name of your project.',
+            flag = False)
     ]
 
-    help = '''\
+    help = '''
 Creates a <comment>Python Project Environment</> in the current directory.
+
+A <comment>Python Project Environment</> includes:
+    - ...
+    - ...
 '''
 
     def handle(self):
+
+        # This variable value is 'None'
+        # if user doesn't explicitly pass the argument --name
+        # on the command-line interface
         name = self.option('name')
 
+        # The default value for variable 'name' will be
+        # the name of the current directory if user doesn't
+        # explicitly pass the argument --name on the command-line interface
         if not name:
             name = Path.cwd().name.lower()
 
         question = self.create_question(
-            f'Project name [<comment>{name}</comment>]: ',
-            default = name
+            f'Project name [<comment>{name}</comment>]: '
         )
 
+        # Prompts the question and get the value
+        # passed by the user
         name = self.ask(question)
-        
+
         directories = [
             'docs',
             'tests',
