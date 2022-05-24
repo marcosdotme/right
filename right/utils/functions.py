@@ -60,13 +60,15 @@ def create_dunder_init_file(
 
 
 def get_users_git_config(
-    git_config_file: str = Path().home() / '.gitconfig'
+    use_local_git_config: bool = True,
+    use_global_git_config: bool = False
 ) -> Dict:
-    """Reads '.gitconfig' file to get name and email for the current user.
+    """Reads the git configuration to get name and email for the current user.
 
     Keyword Arguments
     -----------------
-        git_config_file `str`: Path to '.gitconfig' file. (default = Path().home()/'.gitconfig')
+        use_local_git_config `bool`: Uses local git configuration.
+        use_global_git_config `bool`: Uses global git configuration.
 
     Returns
     -------
@@ -78,17 +80,24 @@ def get_users_git_config(
     {'name': 'Your Name', 'email': 'your.email@your.domain.com'}
     """
 
-    config_file = Path(git_config_file)
+    local_git_config_file = Path().cwd() / '.git/config'
+    global_git_config_file = Path().home() / '.gitconfig'
 
-    if not config_file.exists():
-        return {'name': '', 'email': ''}
+    if use_local_git_config and local_git_config_file.exists():
+        config_file = local_git_config_file
+
+    if use_global_git_config and global_git_config_file.exists():
+        config_file = global_git_config_file
+
+    if not local_git_config_file.exists() and not global_git_config_file.exists():
+        return {'name': None, 'email': None}
 
     with open(config_file, 'br') as file:
-        config_file = ConfigFile.from_file(file)
+        dulwich_config_file = ConfigFile.from_file(file)
 
         try:
-            name = config_file.get(section = 'user', name = 'name').decode()
-            email = config_file.get(section = 'user', name = 'email').decode()
+            name = dulwich_config_file.get(section = 'user', name = 'name').decode()
+            email = dulwich_config_file.get(section = 'user', name = 'email').decode()
             return {'name': name, 'email': email}
         except KeyError:
-            return {'name': '', 'email': ''}
+            return {'name': None, 'email': None}
