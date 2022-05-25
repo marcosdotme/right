@@ -120,3 +120,16 @@ def git_is_installed():
             dedent('''\
         [bold red]Git is not installed or not in path. [/bold red]Check the link and install before proceed: [link=https://git-scm.com/]https://git-scm.com/[/link]''')
         )
+
+
+def initiate_git():
+    subprocess.run(
+        ['git', 'init', '-b', 'main'],
+        stdout = subprocess.DEVNULL,
+        stderr = subprocess.DEVNULL
+    )
+    subprocess.run(
+        ['git', 'checkout', '-b', 'dev'],
+        stdout = subprocess.DEVNULL,
+        stderr = subprocess.DEVNULL
+    )
