@@ -1,4 +1,6 @@
+import subprocess
 from pathlib import Path
+from textwrap import dedent
 from typing import Dict
 from typing import List
 
@@ -101,3 +103,20 @@ def get_users_git_config(
             return {'name': name, 'email': email}
         except KeyError:
             return {'name': None, 'email': None}
+
+
+def git_is_installed():
+    from rich import print
+
+    try:
+        subprocess.run(
+            ['git', '--version'],
+            stdout = subprocess.DEVNULL,
+            stderr = subprocess.DEVNULL
+        )
+        return True
+    except FileNotFoundError:
+        print(
+            dedent('''\
+        [bold red]Git is not installed or not in path. [/bold red]Check the link and install before proceed: [link=https://git-scm.com/]https://git-scm.com/[/link]''')
+        )
