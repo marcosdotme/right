@@ -105,7 +105,20 @@ def get_users_git_config(
             return {'name': None, 'email': None}
 
 
-def git_is_installed():
+def git_is_installed(
+) -> bool:
+    """Checks if git is installed and configured in path.
+
+    Returns
+    -------
+        `bool`: Returns boolean.
+
+    Example usage
+    -------------
+    >>> print(git_is_installed())
+    True
+    """
+
     from rich import print
 
     try:
@@ -120,6 +133,7 @@ def git_is_installed():
             dedent('''\
         [bold red]Git is not installed or not in path. [/bold red]Check the link and install before proceed: [link=https://git-scm.com/]https://git-scm.com/[/link]''')
         )
+        return False
 
 
 def initiate_git():
