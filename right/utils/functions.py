@@ -136,7 +136,15 @@ def git_is_installed(
         return False
 
 
-def initiate_git():
+def initiate_git(
+) -> None:
+    """Initiate a git repository and do a checkout to 'dev' branch.
+
+    Example usage
+    -------------
+    >>> initiate_git()
+    """
+
     subprocess.run(
         ['git', 'init', '-b', 'main'],
         stdout = subprocess.DEVNULL,
