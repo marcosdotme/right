@@ -8,6 +8,7 @@ authors = ["Marcos Martins <contato@marcosmartins.me>"]
 python = "^3.10"
 cleo = {git = "https://github.com/sdispater/cleo.git"}
 dulwich = "^0.20.35"
+rich = "^12.4.4"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"
