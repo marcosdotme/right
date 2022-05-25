@@ -155,3 +155,54 @@ def initiate_git(
         stdout = subprocess.DEVNULL,
         stderr = subprocess.DEVNULL
     )
+
+
+def install_poetry(
+) -> bool:
+    """Installs Poetry.
+
+    Returns
+    -------
+        `bool`: Returns boolean if Poetry has been installed.
+
+    Example usage
+    -------------
+    >>> install_poetry()
+    """
+
+    from rich import print
+
+    script = 'right/vendor/poetry/install-poetry.py'
+    
+    # Installs Poetry
+    try:
+        subprocess.run(
+            ['python', script],
+            stdout = subprocess.DEVNULL
+        )
+    except FileNotFoundError:
+        try:
+            subprocess.run(
+            ['python3', script],
+            stdout = subprocess.DEVNULL
+        )
+        except FileNotFoundError:
+            print(
+                dedent('''\
+            [bold red]Python or Python3 is installed and configured in your path?[/bold red]''')
+            )
+            return False
+
+    # Checks if Poetry where installed and configured in path
+    try:
+        subprocess.run(
+            ['poetry', '--version'],
+            stdout = subprocess.DEVNULL
+        )
+        return True
+    except FileNotFoundError:
+        print(
+            dedent('''\
+        [bold red]There's an error with Poetry install.[/bold red] Please try to install manually: [link=https://python-poetry.org/docs/#installation]https://python-poetry.org/docs/#installation[/link]''')
+        )
+        return False
