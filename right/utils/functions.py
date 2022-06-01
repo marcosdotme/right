@@ -1,3 +1,4 @@
+import platform
 import subprocess
 from pathlib import Path
 from textwrap import dedent
@@ -206,3 +207,24 @@ def install_poetry(
         [bold red]There's an error with Poetry install.[/bold red] Please try to install manually: [link=https://python-poetry.org/docs/#installation]https://python-poetry.org/docs/#installation[/link]''')
         )
         return False
+
+
+def detect_os(
+) -> str:
+    """Returns the name of operating system.
+
+    Returns
+    -------
+        `str`: 'Windows', 'Linux' or 'MacOS'.
+
+    Example usage
+    -------------
+    >>> print(detect_os())
+    'Windows'
+    """
+
+    if platform.system() == 'Darwin':
+        return 'MacOS'
+    
+    # If it's any other operating system
+    return platform.system()
