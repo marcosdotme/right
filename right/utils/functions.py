@@ -190,7 +190,7 @@ def install_poetry(
         except FileNotFoundError:
             print(
                 dedent('''\
-            [bold red]Python or Python3 is installed and configured in your path?[/bold red]''')
+            [bold red]python or python3 is installed and configured in your path?[/bold red]''')
             )
             return False
 
