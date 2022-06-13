@@ -184,9 +184,9 @@ def install_poetry(
     except FileNotFoundError:
         try:
             subprocess.run(
-            ['python3', script],
-            stdout = subprocess.DEVNULL
-        )
+                ['python3', script],
+                stdout = subprocess.DEVNULL
+            )
         except FileNotFoundError:
             print(
                 dedent('''\
